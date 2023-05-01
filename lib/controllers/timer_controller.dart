@@ -3,7 +3,9 @@ import 'dart:async';
 import 'package:get/get.dart';
 
 class TimerController extends GetxController {
-  RxString timeFormatted = '00:00:00'.obs;
+  Rx<String> timeFormatted = '00:00:00'.obs;
+  RxList<String> laps = <String>[].obs;
+  RxBool isCounting = false.obs;
 
   int _timeInMinutes = 0;
   int _timeInSeconds = 0;
@@ -12,6 +14,7 @@ class TimerController extends GetxController {
   Timer? _timer;
 
   void start() {
+    isCounting.value = true;
     _timer = Timer.periodic(
       const Duration(milliseconds: 1),
       (_) {
@@ -32,11 +35,22 @@ class TimerController extends GetxController {
     );
   }
 
-  void reset() {
+  void stop() {
     _timer?.cancel();
+    isCounting.value = false;
   }
 
-  void lap() {}
+  void reset() {
+    _timeInMilliseconds = 0;
+    _timeInSeconds = 0;
+    _timeInMinutes = 0;
+    timeFormatted.value = '00:00:00';
+    isCounting.value = false;
+    _timer?.cancel();
+    laps.value = [];
+  }
 
-  void clearLaps() {}
+  void lap() {
+    laps.add(timeFormatted.value);
+  }
 }
