@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:stopwatch_app/controllers/timer_controller.dart';
+
+import 'pages/main_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -9,18 +13,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    Get.put(TimerController());
+
+    return const GetMaterialApp(
       title: 'Flutter Demo',
       home: MainPage(),
     );
-  }
-}
-
-class MainPage extends StatelessWidget {
-  const MainPage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return const Placeholder();
   }
 }
