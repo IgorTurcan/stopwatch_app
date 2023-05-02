@@ -17,7 +17,7 @@ class TimerButton extends StatelessWidget {
         side: const BorderSide(width: 2, color: Colors.blue),
       ),
       onPressed: onPressed,
-      child: Text(text),
+      child: Text(text, style: TextStyle(fontSize: 20)),
     );
   }
 }
